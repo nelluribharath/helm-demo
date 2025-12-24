@@ -45,13 +45,13 @@ jobs:
 
     - name: Update Helm chart with new image tag
       run: |
-        sed -i "s|tag: .*|tag: $IMAGE_TAG|" values.yaml
+        sed -i "s|tag: .*|tag: $IMAGE_TAG|" helm-demo/values.yaml
 
     - name: Commit and push changes
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
-        git add values.yaml
+        git add helm-demo/values.yaml
         git commit -m "Update image tag to $IMAGE_TAG"
         git push
 
