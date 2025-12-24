@@ -9,6 +9,10 @@ permissions:
   id-token: write
   contents: write 
 
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  ECR_REGISTRY: ${{ vars.ECR_REGISTRY }}
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
 
 jobs:
   build-and-deploy:
@@ -28,6 +32,12 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
     
+    - name: Debug environment variables
+      run: |
+        echo "AWS_REGION=$AWS_REGION"
+        echo "ECR_REGISTRY=$ECR_REGISTRY"
+        echo "ECR_REPOSITORY=$ECR_REPOSITORY"
+ 
     - name: Build Docker image
       run: |
         IMAGE_TAG=$(date +%s)
