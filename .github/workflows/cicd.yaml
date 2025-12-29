@@ -34,7 +34,7 @@ jobs:
  
     - name: Build Docker image
       run: |
-        IMAGE_TAG=$(date +%s)
+        IMAGE_TAG=${GITHUB_SHA::7}
         echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
@@ -45,7 +45,7 @@ jobs:
 
     - name: Update Helm chart with new image tag
       run: |
-        sed -i "s|tag: .*|tag: $IMAGE_TAG|" helm-demo/values.yaml
+        sed -i "s/tag: .*/tag: \"$IMAGE_TAG\"/" helm-demo/values.yaml
 
     - name: Commit and push changes
       run: |
