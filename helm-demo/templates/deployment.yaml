@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | quote }}"
           ports:
             - containerPort: 80
 
