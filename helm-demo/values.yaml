@@ -1,6 +1,6 @@
 image:
   repository: 303258617638.dkr.ecr.ap-south-1.amazonaws.com/demo-app
-  tag: 1766996073
+  tag: 1766996989
 
 service:
   type: ClusterIP
